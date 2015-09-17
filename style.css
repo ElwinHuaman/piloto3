@@ -20,5 +20,8 @@
 }
 img {
 	position: relative;
-	width: 85%;
+	width: 150px;
+}
+#distance, #total {
+	color: red;
 }

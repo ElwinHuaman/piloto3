@@ -12,9 +12,9 @@
 	var myCenter = new google.maps.LatLng(43.358174, -5.854678);
 	var markers = [];
 	var banks = [
-		['Caja Rural', 43.35589, -5.85099, 1],
-		['Banco Sabadell', 43.35575, -5.85053, 2 ],
-		['La Caixa', 43.35752, -5.84848, 3]
+		["<h1>Caja Rural</h1><img src='http://2.bp.blogspot.com/-VgGuN277mxs/VfcBJCfo-SI/AAAAAAAAMgE/ltnLgQyYXnw/s1600/20150914095933%2B%25281%2529.jpg' height='102px' />", 43.35589, -5.85099, 1],
+		["<h1>Banco Sabadell</h1><img src='http://4.bp.blogspot.com/-7LI6iaOtJiA/VfcBJOceudI/AAAAAAAAMf4/WGShFM4J1fQ/s1600/20150914095933%2B%25282%2529.jpg' height='102px' />", 43.35575, -5.85053, 2 ],
+		["<h1>La Caixa</h1><img src='http://2.bp.blogspot.com/-y2sOJvmLcA0/VfcBJszCeHI/AAAAAAAAMgY/CNZM7HPUrLM/s1600/20150914095933%2B%25283%2529.jpg' height='102px' />", 43.35752, -5.84848, 3]
 	];
 	var bank;
 	var actualBank;
@@ -49,22 +49,31 @@
 	}
 
 	function showBanks() {
-		addCircles();
-		addPolyline();
-		bank = banks[i];
-		marker=new google.maps.Marker({
-		  position: {lat: bank[1], lng:bank[2]},
-		  map: map,
-		  icon: {
-		      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-		      scale: 3
-		    },
-		 // icon: imagen,
-		  title: bank[0],
-		  zIndex:bank[3]
-		  });
-		  i++;
-			if (i>2) {i=0};					
+		if (markers.length>0) {
+			addCircles();
+			addPolyline();
+			bank = banks[i];
+			infowindow = new google.maps.InfoWindow({
+				content:bank[0]
+			});
+			marker=new google.maps.Marker({
+			  position: {lat: bank[1], lng:bank[2]},
+			  map: map,
+			  animation: google.maps.Animation.DROP,
+			  icon: {
+			      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+			      scale: 4
+			    },
+			 // icon: imagen,
+			  title: bank[0],
+			  zIndex:bank[3]
+			  });
+			marker.addListener('click', function(){
+				infowindow.open(map, marker);
+			})
+			  i++;
+				if (i>2) {i=0};						
+		};		
 	}
 
 	function setMapOnAll(map) {
@@ -120,7 +129,7 @@
 		flighPath.setMap(map);
 		distancia = calcDistance(actualPosition,actualBank);
 		puntuacion = calcPoints(distancia);	
-		window.alert(puntuacion);
+		//window.alert(puntuacion);
 		document.getElementById('total').innerHTML="Puntuacion: <b>"+puntuacion+" puntos</b>";	
 		document.getElementById('distance').innerHTML="Distancia: <b>"+distancia+" metros</b>";
 	}
