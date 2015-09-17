@@ -1,0 +1,24 @@
+#container {
+	padding: 10px;
+	position: relative;
+	width: 90%;
+}
+#googleMap {
+	float: left;
+	padding: 10px;
+	position: relative;
+	width: 65%;
+	height: 400px;
+	
+}
+#menu {
+	float: right;
+	padding: 10px;
+	position: relative;
+	width: 25%;
+	background: yellow;
+}
+img {
+	position: relative;
+	width: 85%;
+}
